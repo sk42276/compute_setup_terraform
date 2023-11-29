@@ -9,7 +9,7 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = "ca-central-1"
 }
 
 data "aws_ami" "ubuntu" {
@@ -31,11 +31,11 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "instance" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
-  key_name="user25_deployer-key"
+  key_name="devint-user8"
   count=3
   tags = {
-    Name = "user25-instance-${count.index}",
-    role=count.index==0?"user25-lb": (count.index<3?"user25-web":"user25-backend")
+    Name = "user8-instance-${count.index}",
+    role=count.index==0?"user8-lb": (count.index<3?"user8-web":"user8-backend")
   }
 }
 
